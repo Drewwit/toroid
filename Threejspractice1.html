@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Andrew-Toroid with three.js</title>
+		<style>canvas {width: 100%; height: 90% }</style>
+	</head>
+	<body>
+		<script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script> <! Calling the three.js library>
+		<script>
+			var scene = new THREE.Scene(); // creating a new scene
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); //Setting the screen width height ratio
+
+			var renderer = new THREE.WebGLRenderer(); 
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var geometry = new THREE.TorusKnotGeometry(100, 40, 64, 8, 2, 3, 1); //Choosing the toroidal geometry in three.js
+			var material = new THREE.MeshBasicMaterial( { color: 0x6622ff } );   //Setting the color
+			var cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+			bg = document.body.style;
+			bg.background = '#de2020'; //creating the red background
+
+			camera.position.z = 1000; //camera z position is responsible for the separation of the toridal knot, creating a "wormlike" effect
+
+			
+			// setting up a render loop, as opposed to setInterval, so the animation will stop if user 										   navigates away from tab
+			function render() {				
+			requestAnimationFrame(render);
+			cube.rotation.x += 0.1;
+			cube.rotation.y += 0.1;
+			renderer.render(scene, camera);
+			}
+			render();
+
+		</script>
+		<div>
+
+			<p>This is something I built using the three.js library. -Andrew London</p>
+
+		</div>
+
+
+	</body>
+</html>
